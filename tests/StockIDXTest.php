@@ -21,8 +21,6 @@ test('get companies', function() use($client) {
 
     $companies = $stockIDX->getCompanies();
 
-    print_r($companies->values()[0]);
-
     expect($companies->count() > 0)->toBeTrue();
     // expect($companies->values()[0] instanceof Company)->toBeTrue();
 });
@@ -32,8 +30,6 @@ test('get stock price', function() use($client) {
     $symbols = ['BBCA'];
 
     $companies = $stockIDX->getStockPrices($symbols);
-
-    print_r($companies->values()[0]);
 
     expect($companies->count() == count($symbols))->toBeTrue();
     // expect($companies->values()[0] instanceof Company)->toBeTrue();

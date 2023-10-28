@@ -6,16 +6,9 @@ use GuzzleHttp\Client as GuzzleHttpClient;
 class Client {
 
     const API_BASE_PATH = 'https://api.goapi.io';
-    const API_VERSION   = 'v1';
-    const LIBVER        = '0.0.1';
-
+    const API_VERSION   = '';
+    
     private $config;
-
-    private $idx;
-
-    private $regional;
-
-    private $places;
 
     private $http;
 
