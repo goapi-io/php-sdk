@@ -1,6 +1,6 @@
 {
     "name": "goapi-io/php-sdk",
-    "description": "Goapi SDK",
+    "description": "GOAPI.IO PHP SDK",
     "version": "0.0.1",
     "type": "library",
     "require": {
