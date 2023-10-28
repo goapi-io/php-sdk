@@ -31,10 +31,12 @@ class StockIDX {
         });
     }
 
-    public function getStockPrices($symbols) {
+    public function getStockPrices(array $symbols) {
         $endpoint = "/prices";
-        $params = ["symbols" => $symbols];
-        return $this->makeRequest($endpoint, $params);
+        $params = ["symbols" => implode(',', $symbols)];
+        return (new Collection($this->makeRequest($endpoint, $params)->data->results))->map(function($item) {
+            return \GOAPI\IO\Resources\StockPrice::fromArray(json_decode(json_encode($item), true));
+        });
     }
 
     public function getTrendingStocks() {

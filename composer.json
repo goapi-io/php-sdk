@@ -1,6 +1,7 @@
 {
-    "name": "goapi-id/sdk",
+    "name": "goapi-io/php-sdk",
     "description": "Goapi SDK",
+    "version": "0.0.1",
     "type": "library",
     "require": {
         "guzzlehttp/guzzle": "^7.5"
@@ -16,8 +17,8 @@
     },
     "authors": [
         {
-            "name": "Dani",
-            "email": "dani@goapi.id"
+            "name": "daniwebdev",
+            "email": "dani.webdev@gmail.com"
         }
     ],
     "minimum-stability": "stable",

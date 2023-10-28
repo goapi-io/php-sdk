@@ -20,7 +20,15 @@ class Company {
         $this->logo = $logo;
     }
 
-    static function fromArray($array): \GOAPI\IO\Collection {
+    static function fromArray($array): Company {
+        return new self(
+            $array['symbol'],
+            $array['name'],
+            $array['logo']
+        );
+    }
+
+    static function fromArrayList($array): \GOAPI\IO\Collection {
         $output = [];
 
         foreach($array as $item) {
@@ -33,6 +41,6 @@ class Company {
     static function fromResponse(ResponseInterface $response): \GOAPI\IO\Collection {
         $array = json_decode($response->getBody()->getContents());
 
-        return self::fromArray($array->data->results);
+        return self::fromArrayList($array->data->results);
     }
 }
