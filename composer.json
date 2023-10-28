@@ -1,0 +1,32 @@
+{
+    "name": "goapi-id/sdk",
+    "description": "Goapi SDK",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.22"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "GOAPI\\IO\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dani",
+            "email": "dani@goapi.id"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "pest": "./vendor/bin/pest"
+    }
+}
