@@ -23,7 +23,7 @@ $stockIDX = $client->createStockIDX();
 
 // Use the client to call various API endpoints
 $response = $client->getCompanies();
-
+```
 
 ## Requirements
 
