@@ -1,11 +1,10 @@
 <?php
 
 use GOAPI\IO\Client;
-use GOAPI\IO\Models\Company;
 use GOAPI\IO\StockIDX;
 
 $client = new Client([
-    'api_key' => 'ce2c1932-d9cd-5668-0364-324d27f1'
+    'api_key' => getenv('GOAPI_IO_API_KEY'), // your api key
 ]);
 
 test('get client instance', function () use($client) {
