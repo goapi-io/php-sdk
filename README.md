@@ -1,5 +1,7 @@
 # GOAPI.IO | PHP SDK
 
+[![PHP Composer](https://github.com/goapi-io/php-sdk/actions/workflows/php.yml/badge.svg)](https://github.com/goapi-io/php-sdk/actions/workflows/php.yml)
+
 This is the official GOAPI.IO SDK for PHP. It provides a set of functions and classes to interact with the Goapi API.
 
 ## Installation
