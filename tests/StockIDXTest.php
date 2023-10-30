@@ -33,3 +33,12 @@ test('get stock price', function() use($client) {
     expect($companies->count() == count($symbols))->toBeTrue();
     // expect($companies->values()[0] instanceof Company)->toBeTrue();
 });
+
+test('get stock trending', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+
+    $results = $stockIDX->getTrendingStocks()->values();
+    expect($results)->toBeArray();
+    // expect($results[0] instanceof \GOAPI\IO\Resources\StockPriceChange)->toBeTrue();
+    // expect($companies->values()[0] instanceof Company)->toBeTrue();
+});

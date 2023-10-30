@@ -27,6 +27,7 @@ class StockPrice {
 
     static function fromArray($array): StockPrice {
         $company = Company::fromArray($array['company']);
+
         return new self(
             $array['symbol'],
             $company,

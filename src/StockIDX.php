@@ -16,7 +16,7 @@ class StockIDX {
             ]);
 
             // Assuming the API returns JSON response
-            return json_decode($response->getBody());
+            return json_decode($response->getBody(), true);
         } catch (\Exception $e) {
             // Handle exceptions and errors here
             // You might want to log the error or throw a custom exception
@@ -26,32 +26,45 @@ class StockIDX {
 
     public function getCompanies() {
         $endpoint = "/companies";
-        return (new Collection($this->makeRequest($endpoint)->data->results))->map(function($item) {
-            return new \GOAPI\IO\Resources\Company($item->symbol, $item->name, $item->logo);
+        return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
+            return new \GOAPI\IO\Resources\Company($item['symbol'], $item['name'], $item['logo']);
         });
     }
 
     public function getStockPrices(array $symbols) {
         $endpoint = "/prices";
         $params = ["symbols" => implode(',', $symbols)];
-        return (new Collection($this->makeRequest($endpoint, $params)->data->results))->map(function($item) {
-            return \GOAPI\IO\Resources\StockPrice::fromArray(json_decode(json_encode($item), true));
+        return (new Collection($this->makeRequest($endpoint, $params)['data']['results']))->map(function($item) {
+            return \GOAPI\IO\Resources\StockPrice::fromArray($item);
         });
     }
 
     public function getTrendingStocks() {
         $endpoint = "/trending";
-        return $this->makeRequest($endpoint);
+        return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
+            return \GOAPI\IO\Resources\StockPriceChange::fromArray($item);
+        });
     }
 
     public function getTopGainerStocks() {
         $endpoint = "/top_gainer";
-        return $this->makeRequest($endpoint);
+        return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
+            return \GOAPI\IO\Resources\StockPriceChange::fromArray($item);
+        });
     }
 
     public function getTopLoserStocks() {
         $endpoint = "/top_loser";
-        return $this->makeRequest($endpoint);
+        return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
+            return \GOAPI\IO\Resources\StockPriceChange::fromArray($item);
+        });
+    }
+
+    public function getIndices() {
+        $endpoint = "/indices";
+        return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
+            return \GOAPI\IO\Resources\StockPriceChange::fromArray($item);
+        });
     }
 
     public function getHistoricalData($symbol, $from = null, $to = null) {
