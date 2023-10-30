@@ -17,8 +17,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    # - name: Validate composer.json and composer.lock
-    #   run: composer validate --strict
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
 
     - name: Cache Composer packages
       id: composer-cache
@@ -28,14 +28,12 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
+
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
       
-    - name: Set ENV
+    - name: Get ENV
       run: echo ${{ secrets.KEY }}
-
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
 
     - name: Run test suite
       run: GOAPI_IO_API_KEY=${{ secrets.KEY }} composer run-script pest

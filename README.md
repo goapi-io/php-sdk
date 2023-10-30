@@ -29,7 +29,7 @@ $response = $client->getCompanies();
 
 ## Requirements
 
-- PHP 7.0 or higher
+- PHP 8.1 or higher
 - GuzzleHttp library
 
 ## Contributing
