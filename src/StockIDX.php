@@ -5,10 +5,23 @@ class StockIDX {
     private $client;
     private $apiBaseUrl = '/stock/idx';
 
+    /**
+     * Constructs a new instance of the class.
+     *
+     * @param \GuzzleHttp\Client $client The Guzzle HTTP client.
+     */
     public function __construct(\GuzzleHttp\Client $client) {
         $this->client = $client;
     }
 
+    /**
+     * Makes a request to the specified endpoint with optional parameters.
+     *
+     * @param string $endpoint The endpoint to make the request to.
+     * @param array $params Optional parameters to include in the request.
+     * @throws \Exception If an error occurs during the request.
+     * @return array The response from the API as an associative array.
+     */
     private function makeRequest($endpoint, $params = []) {
         try {
             $response = $this->client->request('GET', $this->apiBaseUrl . $endpoint, [
