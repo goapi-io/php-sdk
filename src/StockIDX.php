@@ -85,10 +85,29 @@ class StockIDX {
     public function getIndices() {
         $endpoint = "/indices";
         return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\Stock\StockPriceChange::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\StockIndex::fromArray($item);
         });
     }
 
+    /**
+     * Retrieves the index items for a given symbol.
+     *
+     * @param string $symbol The index symbol for which to retrieve index items.
+     * @return \Illuminate\Support\Collection A collection of StockIndex objects.
+     */
+    public function getIndexItems($symbol) {
+        $endpoint = "/index/$symbol/items";
+        return (new Collection($this->makeRequest($endpoint)['data']['results']));
+    }
+
+    /**
+     * Retrieves historical data for a given stock symbol within a specified date range.
+     *
+     * @param string $symbol The stock symbol to retrieve historical data for.
+     * @param string|null $from The start date of the historical data range in 'YYYY-MM-DD' format. Defaults to null.
+     * @param string|null $to The end date of the historical data range in 'YYYY-MM-DD' format. Defaults to null.
+     * @return \GOAPI\IO\Resources\Stock\StockPrice[] A collection of StockPrice objects representing the historical data.
+     */
     public function getHistoricalData($symbol, $from = null, $to = null) {
         $endpoint = "/{$symbol}/historical";
         $params = [];
@@ -109,6 +128,14 @@ class StockIDX {
         return $this->makeRequest($endpoint);
     }
 
+    /**
+     * Retrieves the broker summary for a given symbol and date.
+     *
+     * @param string $symbol The symbol to retrieve the broker summary for.
+     * @param string $date The date to retrieve the broker summary for.
+     * @throws Some_Exception_Class A description of the exception that may be thrown.
+     * @return Collection The broker summary as a collection of BrokerSummary objects.
+     */
     public function getBrokerSummary($symbol, $date) {
         $endpoint = "/{$symbol}/broker_summary";
         $params   = ["date" => $date];
@@ -118,6 +145,14 @@ class StockIDX {
         });
     }
 
+    /**
+     * Retrieves the stock indicators from the API.
+     *
+     * @param int $page The page number of the results. Default is 1.
+     * @param string|null $date The date of the indicators. Default is null.
+     * @throws Some_Exception_Class A description of the exception that can be thrown.
+     * @return Collection A collection of StockIndicator objects.
+     */
     public function getStockIndicators($page = 1, $date = null) {
         $endpoint = "/indicators";
         $params = [];

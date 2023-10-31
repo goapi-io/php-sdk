@@ -30,6 +30,22 @@ test('get company profile', function() use($client) {
     expect($response->symbol == 'BBCA')->toBeTrue();
 });
 
+test('get stock indices', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+    $response  = $stockIDX->getIndices();
+
+    expect($response instanceof \GOAPI\IO\Collection)->toBeTrue();
+    expect($response[0] instanceof \GOAPI\IO\Resources\Stock\StockIndex)->toBeTrue();
+});
+
+test('get stock index items', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+    $response  = $stockIDX->getIndexItems('LQ45');
+
+    expect($response instanceof \GOAPI\IO\Collection)->toBeTrue();
+    expect(is_string($response[0]))->toBeTrue();
+});
+
 test('get stock price', function() use($client) {
     $stockIDX = $client->createStockIDX();
     $symbols = ['BBCA'];
