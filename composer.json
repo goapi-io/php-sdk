@@ -1,6 +1,7 @@
 {
     "name": "goapi-io/php-sdk",
     "description": "GOAPI.IO PHP SDK",
+    "version": "1.0.0",
     "type": "library",
     "require": {
         "php": "^8.1",
