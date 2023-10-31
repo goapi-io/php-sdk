@@ -40,7 +40,7 @@ class StockIDX {
     public function getCompanies() {
         $endpoint = "/companies";
         return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
-            return new \GOAPI\IO\Resources\Company($item['symbol'], $item['name'], $item['logo']);
+            return new \GOAPI\IO\Resources\Stock\Company($item['symbol'], $item['name'], $item['logo']);
         });
     }
 
@@ -48,7 +48,7 @@ class StockIDX {
         $endpoint = "/$symbol/profile";
 
         if($this->makeRequest($endpoint)['data']) {
-            return \GOAPI\IO\Resources\CompanyProfile::fromArray($this->makeRequest($endpoint)['data']);
+            return \GOAPI\IO\Resources\Stock\CompanyProfile::fromArray($this->makeRequest($endpoint)['data']);
         }
 
     }
@@ -57,35 +57,35 @@ class StockIDX {
         $endpoint = "/prices";
         $params = ["symbols" => implode(',', $symbols)];
         return (new Collection($this->makeRequest($endpoint, $params)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\StockPrice::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\StockPrice::fromArray($item);
         });
     }
 
     public function getTrendingStocks() {
         $endpoint = "/trending";
         return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\StockPriceChange::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\StockPriceChange::fromArray($item);
         });
     }
 
     public function getTopGainerStocks() {
         $endpoint = "/top_gainer";
         return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\StockPriceChange::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\StockPriceChange::fromArray($item);
         });
     }
 
     public function getTopLoserStocks() {
         $endpoint = "/top_loser";
         return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\StockPriceChange::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\StockPriceChange::fromArray($item);
         });
     }
 
     public function getIndices() {
         $endpoint = "/indices";
         return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\StockPriceChange::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\StockPriceChange::fromArray($item);
         });
     }
 
@@ -100,7 +100,7 @@ class StockIDX {
         }
 
         return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\StockPrice::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\StockPrice::fromArray($item);
         });
     }
 
@@ -114,7 +114,7 @@ class StockIDX {
         $params   = ["date" => $date];
 
         return (new Collection($this->makeRequest($endpoint, $params)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\BrokerSummary::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\BrokerSummary::fromArray($item);
         });
     }
 
@@ -129,7 +129,7 @@ class StockIDX {
         }
 
         return (new Collection($this->makeRequest($endpoint, $params)['data']['results']))->map(function($item) {
-            return \GOAPI\IO\Resources\StockIndicator::fromArray($item);
+            return \GOAPI\IO\Resources\Stock\StockIndicator::fromArray($item);
         });
     }
 }

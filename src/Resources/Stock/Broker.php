@@ -1,5 +1,5 @@
 <?php
-namespace GoAPI\IO\Resources;
+namespace GOAPI\IO\Resources\Stock;
 
 class Broker {
     public $code;

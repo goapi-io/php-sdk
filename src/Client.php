@@ -4,32 +4,22 @@ namespace GOAPI\IO;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client {
-
     const API_BASE_PATH = 'https://api.goapi.io';
-    const API_VERSION   = '';
-    
-    private $config;
+    const API_VERSION = '';
 
+    private $config;
     private $http;
 
-    function __construct(array $config=[])
+    public function __construct(array $config = [])
     {
         $this->config = array_merge([
-            'base_uri' => self::API_BASE_PATH.'/'.self::API_VERSION.'/',
-            'api_key'   => '',
+            'base_uri' => self::API_BASE_PATH . '/' . self::API_VERSION . '/',
+            'api_key' => '',
         ], $config);
-
     }
 
-    function getHttpClient() {
-        if(!isset($this->http)) {
-            $this->http = $this->createHttpClient();
-        }
-
-        return $this->http;
-    }
-
-    protected function createHttpClient() {
+    private function createHttpClient()
+    {
         $options = [
             'base_uri' => $this->config['base_uri'],
             'headers' => [
@@ -40,8 +30,23 @@ class Client {
         return new GuzzleHttpClient($options);
     }
 
-    function createStockIDX(): \GOAPI\IO\StockIDX {
+    public function getHttpClient()
+    {
+        if (!isset($this->http)) {
+            $this->http = $this->createHttpClient();
+        }
+
+        return $this->http;
+    }
+
+
+    public function createStockIDX()
+    {
         return new \GOAPI\IO\StockIDX($this->getHttpClient());
     }
-    
+
+    public function createIndonesianRegion()
+    {
+        return new \GOAPI\IO\IndonesianRegion($this->getHttpClient());
+    }
 }

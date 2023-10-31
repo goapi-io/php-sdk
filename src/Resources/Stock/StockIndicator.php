@@ -1,5 +1,5 @@
 <?php
-namespace GOAPI\IO\Resources;
+namespace GOAPI\IO\Resources\Stock;
 
 class StockIndicator {
     /**

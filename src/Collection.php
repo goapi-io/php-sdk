@@ -50,7 +50,7 @@ class Collection implements \Countable, \ArrayAccess, \IteratorAggregate
 
     public function values(): array
     {
-        return $this->items;
+        return array_values($this->items);
     }
 
     public function take($count)

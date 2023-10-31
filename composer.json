@@ -28,6 +28,8 @@
         }
     },
     "scripts": {
-        "pest": "./vendor/bin/pest"
+        "pest": "./vendor/bin/pest",
+        "test-region": "./vendor/bin/pest tests/IndonesianRegionTest.php",
+        "test-idx": "./vendor/bin/pest tests/StockIDXTest.php"
     }
 }

@@ -22,6 +22,14 @@ test('get companies', function() use($client) {
     expect($companies->count() > 0)->toBeTrue();
 });
 
+test('get company profile', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+    $response  = $stockIDX->getProfile(symbol: 'BBCA');
+
+    expect($response instanceof \GOAPI\IO\Resources\Stock\CompanyProfile)->toBeTrue();
+    expect($response->symbol == 'BBCA')->toBeTrue();
+});
+
 test('get stock price', function() use($client) {
     $stockIDX = $client->createStockIDX();
     $symbols = ['BBCA'];
@@ -72,11 +80,4 @@ test('get stock indicators', function() use($client) {
     $results  = $stockIDX->getStockIndicators(page: 1, date: '2023-10-30');
 
     expect($results instanceof \GOAPI\IO\Collection)->toBeTrue();
-});
-
-test('get company profile', function() use($client) {
-    $stockIDX = $client->createStockIDX();
-    $response  = $stockIDX->getProfile(symbol: 'BBCA');
-
-    expect($response instanceof \GOAPI\IO\Resources\CompanyProfile)->toBeTrue();
 });

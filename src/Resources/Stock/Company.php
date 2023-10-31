@@ -1,5 +1,5 @@
 <?php
-namespace GOAPI\IO\Resources;
+namespace GOAPI\IO\Resources\Stock;
 
 use Psr\Http\Message\ResponseInterface;
 

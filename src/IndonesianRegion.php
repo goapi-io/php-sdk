@@ -16,7 +16,7 @@ class IndonesianRegion {
             ]);
 
             // Assuming the API returns JSON response
-            return json_decode($response->getBody());
+            return json_decode($response->getBody(), true);
         } catch (\Exception $e) {
             // Handle exceptions and errors here
             // You might want to log the error or throw a custom exception
@@ -24,22 +24,34 @@ class IndonesianRegion {
         }
     }
 
-    public function getProvince() {
-        $endpoint = "/province";
-        return $this->makeRequest($endpoint);
+    public function getProvinsi() {
+        $endpoint = "/provinsi";
+        return (new Collection($this->makeRequest($endpoint)['data']))->map(function($item) {
+            return new \GOAPI\IO\Resources\Region\Region($item['id'], $item['name']);
+        });
     }
 
-    public function getCity($provinceId) {
-        $endpoint = "/city";
-        $params   = ["province_id" => $provinceId];
-        return $this->makeRequest($endpoint, $params);
+    public function getKota($provinsiId) {
+        $endpoint = "/kota";
+        $params   = ["provinsi_id" => $provinsiId];
+        return (new Collection($this->makeRequest($endpoint, $params)['data']))->map(function($item) {
+            return new \GOAPI\IO\Resources\Region\Region($item['id'], $item['name']);
+        });
     }
 
-    public function getSubDistrict() {
-
+    public function getKecamatan($kotaId) {
+        $endpoint = "/kecamatan";
+        $params   = ["kota_id" => $kotaId];
+        return (new Collection($this->makeRequest($endpoint, $params)['data']))->map(function($item) {
+            return new \GOAPI\IO\Resources\Region\Region($item['id'], $item['name']);
+        });
     }
 
-    public function getVillage() {
-        
+    public function getKelurahan($kecamatanId) {
+        $endpoint = "/kelurahan";
+        $params   = ["kecamatan_id" => $kecamatanId];
+        return (new Collection($this->makeRequest($endpoint, $params)['data']))->map(function($item) {
+            return new \GOAPI\IO\Resources\Region\Region($item['id'], $item['name']);
+        });
     }
 }
