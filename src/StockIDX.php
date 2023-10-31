@@ -44,6 +44,15 @@ class StockIDX {
         });
     }
 
+    public function getProfile($symbol) {
+        $endpoint = "/$symbol/profile";
+
+        if($this->makeRequest($endpoint)['data']) {
+            return \GOAPI\IO\Resources\CompanyProfile::fromArray($this->makeRequest($endpoint)['data']);
+        }
+
+    }
+
     public function getStockPrices(array $symbols) {
         $endpoint = "/prices";
         $params = ["symbols" => implode(',', $symbols)];
@@ -118,12 +127,9 @@ class StockIDX {
         if ($date) {
             $params["date"] = $date;
         }
-        return $this->makeRequest($endpoint, $params);
+
+        return (new Collection($this->makeRequest($endpoint, $params)['data']['results']))->map(function($item) {
+            return \GOAPI\IO\Resources\StockIndicator::fromArray($item);
+        });
     }
 }
-
-// Example usage:
-// $apiBaseUrl = "https://api.example.com";
-// $stockAPI = new StockIDX($apiBaseUrl);
-// $stockPrices = $stockAPI->getStockPrices("BBCA,AALI,GOTO");
-// var_dump($stockPrices);

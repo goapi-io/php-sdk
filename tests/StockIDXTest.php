@@ -14,7 +14,6 @@ test('get client instance', function () use($client) {
 
 });
 
-
 test('get companies', function() use($client) {
     $stockIDX = $client->createStockIDX();
 
@@ -47,11 +46,37 @@ test('get stock trending', function() use($client) {
     expect($results)->toBeArray();
 });
 
+test('get stock top loser', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+
+    $results = $stockIDX->getTopLoserStocks()->values();
+    expect($results)->toBeArray();
+});
+
+test('get stock top gainer', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+
+    $results = $stockIDX->getTopGainerStocks()->values();
+    expect($results)->toBeArray();
+});
+
 test('get broker summary', function() use($client) {
     $stockIDX = $client->createStockIDX();
     $results  = $stockIDX->getBrokerSummary('BBCA', '2023-10-30');
+    
+    expect($results instanceof \GOAPI\IO\Collection)->toBeTrue();
+});
 
-
+test('get stock indicators', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+    $results  = $stockIDX->getStockIndicators(page: 1, date: '2023-10-30');
 
     expect($results instanceof \GOAPI\IO\Collection)->toBeTrue();
+});
+
+test('get company profile', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+    $response  = $stockIDX->getProfile(symbol: 'BBCA');
+
+    expect($response instanceof \GOAPI\IO\Resources\CompanyProfile)->toBeTrue();
 });
