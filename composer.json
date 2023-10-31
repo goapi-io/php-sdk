@@ -30,6 +30,7 @@
     "scripts": {
         "pest": "./vendor/bin/pest",
         "test-region": "./vendor/bin/pest tests/IndonesianRegionTest.php",
-        "test-idx": "./vendor/bin/pest tests/StockIDXTest.php"
+        "test-idx": "./vendor/bin/pest tests/StockIDXTest.php",
+        "test-places": "./vendor/bin/pest tests/PlacesTest.php"
     }
 }

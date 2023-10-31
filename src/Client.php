@@ -49,4 +49,9 @@ class Client {
     {
         return new \GOAPI\IO\IndonesianRegion($this->getHttpClient());
     }
+
+    public function createPlaces()
+    {
+        return new \GOAPI\IO\Places($this->getHttpClient());
+    }
 }

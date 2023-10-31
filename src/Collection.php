@@ -58,7 +58,7 @@ class Collection implements \Countable, \ArrayAccess, \IteratorAggregate
         return new static(array_slice($this->items, 0, $count));
     }
 
-    public function map(callable $callback)
+    public function map(callable $callback): Collection
     {
         return new static(array_map($callback, $this->items));
     }
@@ -67,5 +67,7 @@ class Collection implements \Countable, \ArrayAccess, \IteratorAggregate
     {
         return new \ArrayIterator($this->items);
     }
+
+
 
 }
