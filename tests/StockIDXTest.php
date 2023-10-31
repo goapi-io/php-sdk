@@ -21,7 +21,6 @@ test('get companies', function() use($client) {
     $companies = $stockIDX->getCompanies();
 
     expect($companies->count() > 0)->toBeTrue();
-    // expect($companies->values()[0] instanceof Company)->toBeTrue();
 });
 
 test('get stock price', function() use($client) {
@@ -31,7 +30,14 @@ test('get stock price', function() use($client) {
     $companies = $stockIDX->getStockPrices($symbols);
 
     expect($companies->count() == count($symbols))->toBeTrue();
-    // expect($companies->values()[0] instanceof Company)->toBeTrue();
+});
+
+test('get stock historical price', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+
+    $historical = $stockIDX->getHistoricalData('BBCA', from: date('Y-m-d', strtotime('-1 month')), to: date('Y-m-d'));
+
+    expect($historical instanceof \GOAPI\IO\Collection)->toBeTrue();
 });
 
 test('get stock trending', function() use($client) {
@@ -39,6 +45,13 @@ test('get stock trending', function() use($client) {
 
     $results = $stockIDX->getTrendingStocks()->values();
     expect($results)->toBeArray();
-    // expect($results[0] instanceof \GOAPI\IO\Resources\StockPriceChange)->toBeTrue();
-    // expect($companies->values()[0] instanceof Company)->toBeTrue();
+});
+
+test('get broker summary', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+    $results  = $stockIDX->getBrokerSummary('BBCA', '2023-10-30');
+
+
+
+    expect($results instanceof \GOAPI\IO\Collection)->toBeTrue();
 });

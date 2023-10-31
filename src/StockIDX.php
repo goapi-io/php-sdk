@@ -89,7 +89,10 @@ class StockIDX {
         if ($to) {
             $params["to"] = $to;
         }
-        return $this->makeRequest($endpoint, $params);
+
+        return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
+            return \GOAPI\IO\Resources\StockPrice::fromArray($item);
+        });
     }
 
     public function getEIPOList() {
@@ -99,11 +102,14 @@ class StockIDX {
 
     public function getBrokerSummary($symbol, $date) {
         $endpoint = "/{$symbol}/broker_summary";
-        $params = ["date" => $date];
-        return $this->makeRequest($endpoint, $params);
+        $params   = ["date" => $date];
+
+        return (new Collection($this->makeRequest($endpoint, $params)['data']['results']))->map(function($item) {
+            return \GOAPI\IO\Resources\BrokerSummary::fromArray($item);
+        });
     }
 
-    public function getStockIndicators($page = null, $date = null) {
+    public function getStockIndicators($page = 1, $date = null) {
         $endpoint = "/indicators";
         $params = [];
         if ($page) {

@@ -14,7 +14,7 @@ class StockPrice {
     public $close;
     public $volume;
 
-    function __construct($symbol, Company $company, $date, $open, $high, $low, $close, $volume) {
+    function __construct($symbol, Company|null $company, $date, $open, $high, $low, $close, $volume) {
         $this->symbol = $symbol;
         $this->company = $company;
         $this->date = $date;
@@ -26,7 +26,11 @@ class StockPrice {
     }
 
     static function fromArray($array): StockPrice {
-        $company = Company::fromArray($array['company']);
+        $company = null;
+
+        if(isset($array['company'])) {
+            $company = Company::fromArray($array['company']);
+        }
 
         return new self(
             $array['symbol'],
