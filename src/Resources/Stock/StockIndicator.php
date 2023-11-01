@@ -2,49 +2,7 @@
 namespace GOAPI\IO\Resources\Stock;
 
 class StockIndicator {
-    /**
-     * Constructs a new instance of the class.
-     *
-     * @param mixed $datetime The datetime value.
-     * @param mixed $symbol The symbol value.
-     * @param mixed $open The open value.
-     * @param mixed $high The high value.
-     * @param mixed $low The low value.
-     * @param mixed $close The close value.
-     * @param mixed $volume The volume value.
-     * @param mixed $Prev1 The Prev1 value.
-     * @param mixed $Prev2 The Prev2 value.
-     * @param mixed $Prev3 The Prev3 value.
-     * @param mixed $Prev4 The Prev4 value.
-     * @param mixed $Prev5 The Prev5 value.
-     * @param mixed $change The change value.
-     * @param mixed $changePct The changePct value.
-     * @param mixed $MA10 The MA10 value.
-     * @param mixed $MA20 The MA20 value.
-     * @param mixed $MA50 The MA50 value.
-     * @param mixed $MA200 The MA200 value.
-     * @param mixed $EMA10 The EMA10 value.
-     * @param mixed $EMA20 The EMA20 value.
-     * @param mixed $EMA50 The EMA50 value.
-     * @param mixed $EMA200 The EMA200 value.
-     * @param mixed $RSI The RSI value.
-     * @param mixed $Day20MA The Day20MA value.
-     * @param mixed $Upper The Upper value.
-     * @param mixed $Lower The Lower value.
-     * @param mixed $Day12EMA The Day12EMA value.
-     * @param mixed $Day26EMA The Day26EMA value.
-     * @param mixed $MACD The MACD value.
-     * @param mixed $SignalLine The SignalLine value.
-     * @param mixed $StochOSC The StochOSC value.
-     * @param mixed $TR The TR value.
-     * @param mixed $ATR The ATR value.
-     * @param mixed $Day9High The Day9High value.
-     * @param mixed $Day9Low The Day9Low value.
-     * @param mixed $Day26High The Day26High value.
-     * @param mixed $Day26Low The Day26Low value.
-     * @param mixed $Day52High The Day52High value.
-     * @param mixed $Day52Low The Day52Low value.
-     */
+
     function __construct(
         public $datetime,
         public $symbol,
@@ -53,11 +11,26 @@ class StockIndicator {
         public $low,
         public $close,
         public $volume,
-        public $Prev1,
-        public $Prev2,
-        public $Prev3,
-        public $Prev4,
-        public $Prev5,
+        public $Prev1Open,
+        public $Prev2Open,
+        public $Prev3Open,
+        public $Prev4Open,
+        public $Prev5Open,
+        public $Prev1Close,
+        public $Prev2Close,
+        public $Prev3Close,
+        public $Prev4Close,
+        public $Prev5Close,
+        public $Prev1High,
+        public $Prev2High,
+        public $Prev3High,
+        public $Prev4High,
+        public $Prev5High,
+        public $Prev1Low,
+        public $Prev2Low,
+        public $Prev3Low,
+        public $Prev4Low,
+        public $Prev5Low,
         public $change,
         public $changePct,
         public $MA10,
@@ -103,11 +76,26 @@ class StockIndicator {
             low: $array["low"],
             close: $array["close"],
             volume: $array["volume"],
-            Prev1: $array["Prev1"],
-            Prev2: $array["Prev2"],
-            Prev3: $array["Prev3"],
-            Prev4: $array["Prev4"],
-            Prev5: $array["Prev5"],
+            Prev1Open: $array["Prev1Open"],
+            Prev2Open: $array["Prev2Open"],
+            Prev3Open: $array["Prev3Open"],
+            Prev4Open: $array["Prev4Open"],
+            Prev5Open: $array["Prev5Open"],
+            Prev1Close: $array["Prev1Close"],
+            Prev2Close: $array["Prev2Close"],
+            Prev3Close: $array["Prev3Close"],
+            Prev4Close: $array["Prev4Close"],
+            Prev5Close: $array["Prev5Close"],
+            Prev1High: $array["Prev1High"],
+            Prev2High: $array["Prev2High"],
+            Prev3High: $array["Prev3High"],
+            Prev4High: $array["Prev4High"],
+            Prev5High: $array["Prev5High"],
+            Prev1Low: $array["Prev1Low"],
+            Prev2Low: $array["Prev2Low"],
+            Prev3Low: $array["Prev3Low"],
+            Prev4Low: $array["Prev4Low"],
+            Prev5Low: $array["Prev5Low"],
             change: $array["change"],
             changePct: $array["change_pct"],
             MA10: $array["MA10"],
