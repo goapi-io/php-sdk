@@ -167,4 +167,11 @@ class StockIDX {
             return \GOAPI\IO\Resources\Stock\StockIndicator::fromArray($item);
         });
     }
+
+    public function getBrokers() {
+        $endpoint = "/brokers";
+        return (new Collection($this->makeRequest($endpoint)['data']['results']))->map(function($item) {
+            return new \GOAPI\IO\Resources\Stock\Broker($item['code'], $item['name']);
+        });
+    }
 }

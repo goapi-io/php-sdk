@@ -97,3 +97,11 @@ test('get stock indicators', function() use($client) {
 
     expect($results instanceof \GOAPI\IO\Collection)->toBeTrue();
 });
+
+test('get brokers', function() use($client) {
+    $stockIDX = $client->createStockIDX();
+    $results  = $stockIDX->getBrokers();
+
+    expect($results instanceof \GOAPI\IO\Collection)->toBeTrue();
+    expect($results[0] instanceof \GOAPI\IO\Resources\Stock\Broker)->toBeTrue();
+});
