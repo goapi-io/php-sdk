@@ -30,10 +30,15 @@ class StockIDX {
 
             // Assuming the API returns JSON response
             return json_decode($response->getBody(), true);
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
             // Handle exceptions and errors here
             // You might want to log the error or throw a custom exception
-            return ["error" => $e->getMessage()];
+            if($e->getResponse()->getStatusCode() === 401) {
+                $response = json_decode($e->getResponse()->getBody()->getContents(), true);
+                throw new \GOAPI\IO\Exceptions\RequestException($response['message'], $e->getResponse()->getStatusCode());
+            }
+
+            throw new \GOAPI\IO\Exceptions\RequestException($e->getMessage(), $e->getCode());
         }
     }
 
