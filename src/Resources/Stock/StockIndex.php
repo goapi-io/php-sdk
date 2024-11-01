@@ -4,8 +4,7 @@ namespace GOAPI\IO\Resources\Stock;
 
 class StockIndex {
 
-    public function __construct(public $symbol, public $description)
-    {
+    public function __construct(public $symbol, public $description, public Price $price) {
         
     }
 
@@ -13,7 +12,8 @@ class StockIndex {
     {
         return new self(
             $array['symbol'],
-            $array['description']
+            $array['description'],
+            Price::fromArray($array['price'])
         );
     }
 

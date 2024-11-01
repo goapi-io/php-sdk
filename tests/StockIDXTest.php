@@ -1,6 +1,7 @@
 <?php
 
 use GOAPI\IO\Client;
+use GOAPI\IO\Resources\Stock\CompanyProfile;
 use GOAPI\IO\StockIDX;
 
 $client = new Client([
@@ -10,7 +11,7 @@ $client = new Client([
 test('get client instance', function () use($client) {
     $stockIDX = $client->createStockIDX();
 
-    expect($stockIDX instanceof StockIDX)->toBeTrue();
+    expect($stockIDX instanceof StockIDX == true)->toBeTrue();
 
 });
 
@@ -26,7 +27,7 @@ test('get company profile', function() use($client) {
     $stockIDX = $client->createStockIDX();
     $response  = $stockIDX->getProfile(symbol: 'BBCA');
 
-    expect($response instanceof \GOAPI\IO\Resources\Stock\CompanyProfile)->toBeTrue();
+    expect($response instanceof CompanyProfile)->toBeTrue();
     expect($response->symbol == 'BBCA')->toBeTrue();
 });
 

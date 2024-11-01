@@ -1,6 +1,9 @@
 <?php
 namespace GOAPI\IO;
 
+use \GOAPI\IO\StockIDX;
+use \GOAPI\IO\IndonesianRegion;
+use \GOAPI\IO\Places;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client {
@@ -42,16 +45,16 @@ class Client {
 
     public function createStockIDX()
     {
-        return new \GOAPI\IO\StockIDX($this->getHttpClient());
+        return new StockIDX($this->getHttpClient());
     }
 
     public function createIndonesianRegion()
     {
-        return new \GOAPI\IO\IndonesianRegion($this->getHttpClient());
+        return new IndonesianRegion($this->getHttpClient());
     }
 
     public function createPlaces()
     {
-        return new \GOAPI\IO\Places($this->getHttpClient());
+        return new Places($this->getHttpClient());
     }
 }
